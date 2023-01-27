@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="After Google search view desctription...">
+    <title>💚 First Page</title>
+ 
+
+</head>
+<body>
+    <script>
+        /*https://beta.openai.com/codex-javascript-sandbox*/
+        var catImage = document.createElement('img');
+catImage.src = 'https://bit.ly/3fsc0rH';
+document.body.appendChild(catImage);
+/* Make it 20% */
+catImage.style.width = '20%';
+/* Make the cat black and white */
+catImage.style.filter = 'grayscale(100%)';
+/* Make it circular */
+catImage.style.borderRadius = '50%';
+    </script>
+
+    <script>
+        /* CREATE 3 BALL BILLARDS GAME */
+var canvas = document.createElement('canvas');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+document.body.appendChild(canvas);
+var ctx = canvas.getContext('2d');
+var balls = [];
+var ballRadius = 10;
+var ballColor = '#0095DD';
+function Ball(x, y, dx, dy) {
+  this.x = x;
+  this.y = y;
+  this.dx = dx;
+  this.dy = dy;
+  this.draw = function() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, ballRadius, 0, Math.PI*2);
+    ctx.fillStyle = ballColor;
+    ctx.fill();
+    ctx.closePath();
+  }
+  this.update = function() {
+    if (this.x + this.dx > canvas.width - ballRadius || this.x + this.dx < ballRadius) {
+      this.dx = -this.dx;
+    }
+    if (this.y + this.dy > canvas.height - ballRadius || this.y + this.dy < ballRadius) {
+      this.dy = -this.dy;
+    }
+    this.x += this.dx;
+    this.y += this.dy;
+    this.draw();
+  }
+}
+function init() {
+  balls = [];
+  for (var i = 0; i < 3; i++) {
+    var x = Math.random() * (canvas.width - ballRadius * 2) + ballRadius;
+    var y = Math.random() * (canvas.height - ballRadius * 2) + ballRadius;
+    var dx = (Math.random() - 0.5) * 2;
+    var dy = (Math.random() - 0.5) * 2;
+    balls.push(new Ball(x, y, dx, dy));
+  }
+}
+function animate() {
+  requestAnimationFrame(animate);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  for (var i = 0; i < balls.length; i++) {
+    balls[i].update();
+  }
+}
+init();
+animate();
+/* ADD STICK */
+var stick = document.createElement('div');
+stick.style.width = '100px';
+stick.style.height = '10px';
+stick.style.backgroundColor = '#0095DD';
+stick.style.position = 'absolute';
+stick.style.left = '50%';
+stick.style.top = '90%';
+stick.style.marginLeft = '-50px';
+document.body.appendChild(stick);
+/* move the stick with mouse motion */
+document.addEventListener('mousemove', function(event) {
+  stick.style.left = event.clientX + 'px';
+});
+    </script>
+</body>
+</html>
